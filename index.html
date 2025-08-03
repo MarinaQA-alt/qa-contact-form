@@ -3,20 +3,25 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Форма обратной связи (валидная)</title>
+    <title>Форма обратной связи (интерактивная)</title>
+    <style>
+        #successMsg {
+            display: none;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h2>Форма обратной связи</h2>
-    <form action="#" method="post" id="contactForm">
+    <form id="contactForm">
         <label for="name">Имя*:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
         <label for="email">Email*:</label><br>
-        <!-- Исправлено: type=email -->
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="phone">Телефон (10–12 цифр):</label><br>
-        <!-- Добавлена валидация длины и паттерн только цифры -->
         <input type="tel" id="phone" name="phone" minlength="10" maxlength="12" pattern="\d{10,12}"><br><br>
 
         <label for="message">Сообщение*:</label><br>
@@ -24,5 +29,16 @@
 
         <input type="submit" value="Отправить">
     </form>
+
+    <p id="successMsg">✅ Сообщение отправлено (симуляция)</p>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // отключить настоящую отправку
+            if (this.checkValidity()) {
+                document.getElementById("successMsg").style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>
