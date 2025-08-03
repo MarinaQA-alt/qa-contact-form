@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Форма обратной связи (интерактивная)</title>
+    <title>Форма обратной связи с багами (симулированная)</title>
     <style>
         #successMsg {
             display: none;
@@ -13,16 +13,18 @@
     </style>
 </head>
 <body>
-    <h2>Форма обратной связи</h2>
+    <h2>Форма обратной связи (с багами)</h2>
     <form id="contactForm">
         <label for="name">Имя*:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
         <label for="email">Email*:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <!-- Баг: тип текст, не email -->
+        <input type="text" id="email" name="email" required><br><br>
 
-        <label for="phone">Телефон (10–12 цифр):</label><br>
-        <input type="tel" id="phone" name="phone" minlength="10" maxlength="12" pattern="\d{10,12}"><br><br>
+        <label for="phone">Телефон:</label><br>
+        <!-- Баг: без валидации длины -->
+        <input type="tel" id="phone" name="phone"><br><br>
 
         <label for="message">Сообщение*:</label><br>
         <textarea id="message" name="message" minlength="10" required></textarea><br><br>
@@ -34,7 +36,7 @@
 
     <script>
         document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // отключить настоящую отправку
+            event.preventDefault(); // отключаем реальную отправку
             if (this.checkValidity()) {
                 document.getElementById("successMsg").style.display = "block";
             }
